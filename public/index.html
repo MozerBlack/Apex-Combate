@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Combate — Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Combate — Painel Principal</title>
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    </body>
+
+  <header>
+    <a href="index.html" class="header-logo-container">
+      <span class="logo-text">APEX COMBATE</span>
+    </a>
+    
+    <nav style="display: flex; gap: 1rem;">
+      <a href="index.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Início</a>
+      <a href="placar.html" class="btn btn-red" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Placar Live</a>
+      <a href="perfil.html" class="btn btn-blue" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Atleta</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <section class="card" style="margin-bottom: 2rem; text-align: center; background: linear-gradient(180deg, rgba(0, 242, 254, 0.1) 0%, var(--bg-card) 100%);">
+      <h1 class="text-cyan" style="font-size: 2.5rem; margin-bottom: 0.5rem;">BEM-VINDO À ARENA APEX</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">Gerenciamento universal de artes marciais, chaves de luta e estatísticas em tempo real.</p>
+    </section>
+
+    <div class="grid-2">
+      
+      <div class="card card-aka">
+        <h2 style="margin-bottom: 0.8rem; color: #fff;">Chaves do Campeonato</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Consulte os confrontos, categorias de peso, faixas e os horários das próximas lutas.</p>
+        <a href="placar.html" class="btn btn-red">Ver Chaves</a>
+      </div>
+
+      <div class="card card-ao">
+        <h2 style="margin-bottom: 0.8rem; color: #fff;">Súmulas Live</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Acompanhe a pontuação ao vivo, penalidades e cronômetro dos combates em andamento.</p>
+        <a href="placar.html" class="btn btn-blue">Acompanhar Luta</a>
+      </div>
+
+      <div class="card">
+        <h2 class="text-cyan" style="margin-bottom: 0.8rem;">Dojo e Academias</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Cadastre sua equipe, gerencie atletas inscritos e acompanhe a pontuação geral do evento.</p>
+        <a href="perfil.html" class="btn">Gerenciar Equipe</a>
+      </div>
+
+      <div class="card">
+        <h2 class="text-gold" style="margin-bottom: 0.8rem;">Passaporte de Atleta</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Histórico completo de combates, graduações, conquistas e banner individual de estatísticas.</p>
+        <a href="perfil.html" class="btn" style="background: linear-gradient(135deg, var(--gold-apex), #ff8800);">Ver Passaporte</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
 </html>
