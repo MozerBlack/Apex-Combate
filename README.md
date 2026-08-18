@@ -1,4 +1,4 @@
-# 🥋 Apex Combate — Plataforma Universal de Campeonatos de Artes Marciais
+# 🥋 Apex Combate — Plataforma Universal de Artes Marciais
 
 > Sistema responsivo e multiplataforma (Web/Mobile/Desktop) para gestão completa de torneios de artes marciais (Karatê, BJJ, Judô, Muay Thai, MMA e mais).
 
