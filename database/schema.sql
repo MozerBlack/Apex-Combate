@@ -2,22 +2,7 @@
 -- APEX COMBATE — BANCO DE DADOS UNIFICADO (8 TABELAS)
 -- ============================================================
 
--- 1. PESSOAS E USUÁRIOS (Unifica Atletas, Técnicos, Mesários e Admins + Logins)
-CREATE TABLE pessoas_usuarios (
-    id_pessoa SERIAL PRIMARY KEY,
-    nome_completo VARCHAR(100) NOT NULL,
-    cpf VARCHAR(14) UNIQUE,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha_hash VARCHAR(255) NOT NULL,
-    tipo_perfil VARCHAR(30) CHECK (tipo_perfil IN ('ATLETA', 'TECNICO', 'MESARIO', 'ADMIN')),
-    id_organizacao INT,
-    data_nascimento DATE,
-    genero VARCHAR(10),
-    registro_federacao VARCHAR(30),
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- 2. ORGANIZAÇÕES E EQUIPES (Unifica Federações, Confederações e Dojos)
+-- 1. ORGANIZAÇÕES E EQUIPES (Criada antes para referência de FK)
 CREATE TABLE organizacoes_equipes (
     id_organizacao SERIAL PRIMARY KEY,
     nome_organizacao VARCHAR(100) NOT NULL,
@@ -25,6 +10,21 @@ CREATE TABLE organizacoes_equipes (
     tipo_organizacao VARCHAR(20) CHECK (tipo_organizacao IN ('FEDERACAO', 'DOJO')),
     tecnico_responsavel VARCHAR(100),
     cidade_uf VARCHAR(50)
+);
+
+-- 2. PESSOAS E USUÁRIOS (Atletas logam com CPF + Data de Nascimento)
+CREATE TABLE pessoas_usuarios (
+    id_pessoa SERIAL PRIMARY KEY,
+    nome_completo VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    data_nascimento DATE NOT NULL,
+    email VARCHAR(100) UNIQUE,              -- Opcional (apenas se desejar cadastrar)
+    senha_hash VARCHAR(255),                 -- Opcional (usado para ADMIN/MESARIO)
+    tipo_perfil VARCHAR(30) DEFAULT 'ATLETA' CHECK (tipo_perfil IN ('ATLETA', 'TECNICO', 'MESARIO', 'ADMIN')),
+    id_organizacao INT REFERENCES organizacoes_equipes(id_organizacao),
+    genero VARCHAR(10),
+    registro_federacao VARCHAR(30),
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 3. MODALIDADES DE ARTES MARCIAIS
@@ -39,7 +39,7 @@ CREATE TABLE modalidades (
 -- 4. GRADUAÇÕES E FAIXAS
 CREATE TABLE graduacoes (
     id_graduacao SERIAL PRIMARY KEY,
-    id_pessoa INT REFERENCES pessoas_usuarios(id_pessoa),
+    id_pessoa INT REFERENCES pessoas_usuarios(id_pessoa) ON DELETE CASCADE,
     id_modalidade INT REFERENCES modalidades(id_modalidade),
     nome_faixa VARCHAR(50) NOT NULL,
     divisao_nivel VARCHAR(20) CHECK (divisao_nivel IN ('NOVOS', 'ESPECIAL'))
@@ -59,7 +59,7 @@ CREATE TABLE campeonatos (
 -- 6. ÁREAS DE COMPETIÇÃO (Tatames, Ringues, Octógonos)
 CREATE TABLE areas_competicao (
     id_area SERIAL PRIMARY KEY,
-    id_campeonato INT REFERENCES campeonatos(id_campeonato),
+    id_campeonato INT REFERENCES campeonatos(id_campeonato) ON DELETE CASCADE,
     nome_area VARCHAR(30) NOT NULL,
     tipo_area VARCHAR(20) CHECK (tipo_area IN ('Tatame', 'Ringue', 'Octogono'))
 );
@@ -67,7 +67,7 @@ CREATE TABLE areas_competicao (
 -- 7. CATEGORIAS DE DISPUTA
 CREATE TABLE categorias (
     id_categoria SERIAL PRIMARY KEY,
-    id_campeonato INT REFERENCES campeonatos(id_campeonato),
+    id_campeonato INT REFERENCES campeonatos(id_campeonato) ON DELETE CASCADE,
     id_modalidade INT REFERENCES modalidades(id_modalidade),
     nome_categoria VARCHAR(100) NOT NULL,
     divisao VARCHAR(20),
@@ -82,7 +82,7 @@ CREATE TABLE categorias (
 -- 8. CONFRONTOS, CHAVES E PLACAR EM TEMPO REAL
 CREATE TABLE confrontos_chave (
     id_confronto SERIAL PRIMARY KEY,
-    id_categoria INT REFERENCES categorias(id_categoria),
+    id_categoria INT REFERENCES categorias(id_categoria) ON DELETE CASCADE,
     id_area INT REFERENCES areas_competicao(id_area),
     numero_luta VARCHAR(10),
     fase VARCHAR(30),

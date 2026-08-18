@@ -3,55 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex Combate — Painel Principal</title>
+  <title>Apex Combate — Login & Painel do Atleta</title>
   
+  <!-- Fontes do Google (Plus Jakarta Sans & Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header>
     <a href="index.html" class="header-logo-container">
-      <span class="logo-text">APEX COMBATE</span>
+      <span class="logo-text">APEX <span>COMBATE</span></span>
     </a>
     
-    <nav style="display: flex; gap: 1rem;">
-      <a href="index.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Início</a>
-      <a href="placar.html" class="btn btn-red" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Placar Live</a>
-      <a href="perfil.html" class="btn btn-blue" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Atleta</a>
+    <nav style="display: flex; gap: 0.8rem;">
+      <a href="index.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">Início</a>
+      <a href="placar.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Placar Live</a>
+      <a href="perfil.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Área do Atleta</a>
     </nav>
   </header>
 
   <main class="container">
     
-    <section class="card" style="margin-bottom: 2rem; text-align: center; background: linear-gradient(180deg, rgba(0, 242, 254, 0.1) 0%, var(--bg-card) 100%);">
-      <h1 class="text-cyan" style="font-size: 2.5rem; margin-bottom: 0.5rem;">BEM-VINDO À ARENA APEX</h1>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Gerenciamento universal de artes marciais, chaves de luta e estatísticas em tempo real.</p>
+    <!-- BANNER DE BOAS-VINDAS -->
+    <section class="card" style="margin-bottom: 2rem; text-align: center; border-color: rgba(225, 29, 72, 0.3);">
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--text-main);">ÁREA DO ATLETA</h1>
+      <p style="color: var(--text-muted); font-size: 1rem;">Acesse sua conta para consultar chaves, horários de luta, carteirinha e pagamentos.</p>
     </section>
 
     <div class="grid-2">
       
-      <div class="card card-aka">
-        <h2 style="margin-bottom: 0.8rem; color: #fff;">Chaves do Campeonato</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Consulte os confrontos, categorias de peso, faixas e os horários das próximas lutas.</p>
-        <a href="placar.html" class="btn btn-red">Ver Chaves</a>
+      <!-- FORMULÁRIO DE LOGIN SIMPLIFICADO -->
+      <div class="card" style="border-top: 4px solid var(--crimson-primary);">
+        <h2 style="margin-bottom: 1.2rem; font-size: 1.3rem;">Acessar Conta</h2>
+        
+        <form id="login-form">
+          <div class="input-group">
+            <label for="cpf">CPF do Atleta</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required autocomplete="off">
+          </div>
+
+          <div class="input-group">
+            <label for="data_nascimento">Data de Nascimento</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" required>
+          </div>
+
+          <button type="submit" class="btn" style="margin-top: 0.5rem;">ENTRAR NO SISTEMA</button>
+        </form>
       </div>
 
-      <div class="card card-ao">
-        <h2 style="margin-bottom: 0.8rem; color: #fff;">Súmulas Live</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Acompanhe a pontuação ao vivo, penalidades e cronômetro dos combates em andamento.</p>
-        <a href="placar.html" class="btn btn-blue">Acompanhar Luta</a>
-      </div>
+      <!-- CARDS DE ATALHO RÁPIDO DO EVENTO -->
+      <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+        
+        <div class="card card-aka">
+          <h2 style="margin-bottom: 0.5rem; color: #fff; font-size: 1.2rem;">Chaves & Súmulas Live</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Consulte o horário do tatame e o acompanhamento dos pontos em tempo real.</p>
+          <a href="placar.html" class="btn" style="background-color: var(--red-combate); width: auto; display: inline-block;">Ver Placar Ao Vivo</a>
+        </div>
 
-      <div class="card">
-        <h2 class="text-cyan" style="margin-bottom: 0.8rem;">Dojo e Academias</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Cadastre sua equipe, gerencie atletas inscritos e acompanhe a pontuação geral do evento.</p>
-        <a href="perfil.html" class="btn">Gerenciar Equipe</a>
-      </div>
+        <div class="card card-ao">
+          <h2 style="margin-bottom: 0.5rem; color: #fff; font-size: 1.2rem;">Passaporte & Graduação</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Histórico de faixas, certificados digitais e pontuação acumulada na temporada.</p>
+          <a href="perfil.html" class="btn" style="background-color: var(--blue-combate); width: auto; display: inline-block;">Ver Histórico</a>
+        </div>
 
-      <div class="card">
-        <h2 class="text-gold" style="margin-bottom: 0.8rem;">Passaporte de Atleta</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Histórico completo de combates, graduações, conquistas e banner individual de estatísticas.</p>
-        <a href="perfil.html" class="btn" style="background: linear-gradient(135deg, var(--gold-apex), #ff8800);">Ver Passaporte</a>
       </div>
 
     </div>
