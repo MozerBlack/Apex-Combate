@@ -13,6 +13,11 @@ const pool = new Pool({
   port: Number(process.env.DB_PORT) || 5432,
 });
 
+// Tratamento de erros assíncronos no pool de conexões
+pool.on('error', (err) => {
+  console.error('❌ Erro inesperado no cliente do PostgreSQL:', err);
+});
+
 // Teste de conexão ao inicializar o serviço
 pool.connect((err, client, release) => {
   if (err) {

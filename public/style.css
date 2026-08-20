@@ -5,265 +5,324 @@
 /* --------------------------------------------------------------------------
    1. VARIÁVEIS DE CORES E TEMAS
    -------------------------------------------------------------------------- */
-:root {
-  /* Cores de Fundo */
-  --bg-dark: #0f172a;           /* Grafite Profundo */
-  --bg-card: #1e293b;           /* Card Elevado */
-  --bg-card-hover: #334155;     /* Card Hover */
-  --bg-header: rgba(15, 23, 42, 0.95);
-
-  /* Vermelho Crimson Oficial (Destaques e Ações) */
-  --crimson-primary: #e11d48;
-  --crimson-hover: #be123c;
-  --crimson-glow: rgba(225, 29, 72, 0.4);
-
-  /* Canto Vermelho (AKA) e Canto Azul (AO) */
-  --red-combate: #ef4444;
-  --red-dark: rgba(239, 68, 68, 0.15);
+   :root {
+    /* Cores de Fundo */
+    --bg-dark: #0f172a;           /* Grafite Profundo */
+    --bg-card: #1e293b;           /* Card Elevado */
+    --bg-card-hover: #334155;     /* Card Hover */
+    --bg-header: rgba(15, 23, 42, 0.95);
   
-  --blue-combate: #3b82f6;
-  --blue-dark: rgba(59, 130, 246, 0.15);
-
-  /* Destaques Especiais */
-  --gold-apex: #f59e0b;
-
-  /* Cores de Texto */
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-
-  /* Bordas e Sombras */
-  --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
-  --border-crimson: 1px solid rgba(225, 29, 72, 0.5);
-  --border-red: 1px solid rgba(239, 68, 68, 0.4);
-  --border-blue: 1px solid rgba(59, 130, 246, 0.4);
+    /* Vermelho Crimson Oficial (Destaques e Ações) */
+    --crimson-primary: #e11d48;
+    --crimson-hover: #be123c;
+    --crimson-glow: rgba(225, 29, 72, 0.4);
   
-  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-  --shadow-crimson: 0 0 15px rgba(225, 29, 72, 0.3);
-}
-
-/* --------------------------------------------------------------------------
-   2. RESET E ESTILOS GERAIS DA PÁGINA
-   -------------------------------------------------------------------------- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* --------------------------------------------------------------------------
-   3. HEADER E LOGO OFICIAL
-   -------------------------------------------------------------------------- */
-header {
-  background: var(--bg-header);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: var(--border-subtle);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-/* Container do Logo */
-.header-logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-.header-logo-img {
-  height: 42px;
-  width: auto;
-  transition: transform 0.2s ease;
-}
-
-.header-logo-img:hover {
-  transform: scale(1.05);
-}
-
-/* Texto APEX COMBATE */
-.logo-text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-main);
-}
-
-.logo-text span {
-  color: var(--crimson-primary);
-}
-
-/* --------------------------------------------------------------------------
-   4. LAYOUT PRINCIPAL E CONTAINERS
-   -------------------------------------------------------------------------- */
-main, .container {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  flex: 1;
-}
-
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-/* --------------------------------------------------------------------------
-   5. CARDS E PAINÉIS ESPORTIVOS
-   -------------------------------------------------------------------------- */
-.card {
-  background: var(--bg-card);
-  border: var(--border-subtle);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-  position: relative;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
-  background-color: var(--bg-card-hover);
-}
-
-/* Card Canto Vermelho (AKA) */
-.card-aka {
-  background: linear-gradient(180deg, var(--red-dark) 0%, var(--bg-card) 100%);
-  border: var(--border-red);
-}
-
-/* Card Canto Azul (AO) */
-.card-ao {
-  background: linear-gradient(180deg, var(--blue-dark) 0%, var(--bg-card) 100%);
-  border: var(--border-blue);
-}
-
-/* --------------------------------------------------------------------------
-   6. BOTÕES E FORMULÁRIOS
-   -------------------------------------------------------------------------- */
-.btn {
-  display: inline-block;
-  background-color: var(--crimson-primary);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.8rem 1.6rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.btn:hover {
-  background-color: var(--crimson-hover);
-  box-shadow: var(--shadow-crimson);
-}
-
-/* Estilização dos Inputs (para CPF e Data de Nascimento) */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
-  text-align: left;
-}
-
-.input-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.input-group input {
-  background-color: var(--bg-dark);
-  border: var(--border-subtle);
-  border-radius: 8px;
-  padding: 0.85rem 1rem;
-  color: var(--text-main);
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.input-group input:focus {
-  border-color: var(--crimson-primary);
-}
-
-/* --------------------------------------------------------------------------
-   7. PLACAR E TEMPO
-   -------------------------------------------------------------------------- */
-.score-number {
-  font-family: 'Rajdhani', 'Montserrat', sans-serif;
-  font-size: 4.5rem;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1;
-  margin: 0.5rem 0;
-}
-
-.timer-box {
-  background: var(--bg-dark);
-  border: var(--border-crimson);
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-family: monospace;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--text-main);
-  text-align: center;
-}
-
-/* --------------------------------------------------------------------------
-   8. RESPONSIVIDADE (MOBILE / TABLET)
-   -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  .grid-2, .grid-3 {
-    grid-template-columns: 1fr;
+    /* Canto Vermelho (AKA) e Canto Azul (AO) */
+    --red-combate: #ef4444;
+    --red-dark: rgba(239, 68, 68, 0.15);
+    
+    --blue-combate: #3b82f6;
+    --blue-dark: rgba(59, 130, 246, 0.15);
+  
+    /* Destaques Especiais */
+    --gold-apex: #f59e0b;
+  
+    /* Cores de Texto */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+  
+    /* Bordas e Sombras */
+    --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+    --border-crimson: 1px solid rgba(225, 29, 72, 0.5);
+    --border-red: 1px solid rgba(239, 68, 68, 0.4);
+    --border-blue: 1px solid rgba(59, 130, 246, 0.4);
+    
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    --shadow-crimson: 0 0 15px rgba(225, 29, 72, 0.3);
   }
   
+  /* --------------------------------------------------------------------------
+     2. RESET E ESTILOS GERAIS DA PÁGINA
+     -------------------------------------------------------------------------- */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  /* --------------------------------------------------------------------------
+     3. HEADER E LOGO OFICIAL
+     -------------------------------------------------------------------------- */
   header {
-    padding: 0.8rem 1rem;
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-subtle);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-
+  
+  /* Container do Logo */
+  .header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  
+  .header-logo-img {
+    height: 42px;
+    width: auto;
+    transition: transform 0.2s ease;
+  }
+  
+  .header-logo-img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Texto APEX COMBATE */
   .logo-text {
-    font-size: 1.4rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-main);
   }
-
+  
+  .logo-text span {
+    color: var(--crimson-primary);
+  }
+  
+  /* --------------------------------------------------------------------------
+     4. LAYOUT PRINCIPAL E CONTAINERS
+     -------------------------------------------------------------------------- */
+  main, .container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    flex: 1;
+  }
+  
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  /* --------------------------------------------------------------------------
+     5. CARDS E PAINÉIS ESPORTIVOS
+     -------------------------------------------------------------------------- */
+  .card {
+    background: var(--bg-card);
+    border: var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    position: relative;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--bg-card-hover);
+  }
+  
+  /* Card Canto Vermelho (AKA) */
+  .card-aka {
+    background: linear-gradient(180deg, var(--red-dark) 0%, var(--bg-card) 100%);
+    border: var(--border-red);
+  }
+  
+  /* Card Canto Azul (AO) */
+  .card-ao {
+    background: linear-gradient(180deg, var(--blue-dark) 0%, var(--bg-card) 100%);
+    border: var(--border-blue);
+  }
+  
+  /* --------------------------------------------------------------------------
+     6. ABAS DE NAVEGAÇÃO E BOTÕES
+     -------------------------------------------------------------------------- */
+  .abas-login {
+    display: flex;
+    background-color: var(--bg-dark);
+    padding: 0.3rem;
+    border-radius: 8px;
+    border: var(--border-subtle);
+  }
+  
+  .aba-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.6rem 0.5rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
+  
+  .aba-btn.active {
+    background-color: var(--crimson-primary);
+    color: #ffffff;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: var(--crimson-primary);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  
+  .btn:hover {
+    background-color: var(--crimson-hover);
+    box-shadow: var(--shadow-crimson);
+  }
+  
+  /* --------------------------------------------------------------------------
+     7. FORMULÁRIOS E INPUTS
+     -------------------------------------------------------------------------- */
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+  
+  .input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .input-group input {
+    background-color: var(--bg-dark);
+    border: var(--border-subtle);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .input-group input:focus {
+    border-color: var(--crimson-primary);
+  }
+  
+  /* --------------------------------------------------------------------------
+     8. BANNERS E ALERTAS
+     -------------------------------------------------------------------------- */
+  .banner {
+    padding: 1rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .banner.sucesso {
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+  
+  .banner.erro {
+    background-color: var(--crimson-primary);
+    color: #ffffff;
+  }
+  
+  /* --------------------------------------------------------------------------
+     9. PLACAR E TEMPO
+     -------------------------------------------------------------------------- */
   .score-number {
-    font-size: 3.5rem;
+    font-family: 'Rajdhani', 'Montserrat', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1;
+    margin: 0.5rem 0;
   }
-}
+  
+  .timer-box {
+    background: var(--bg-dark);
+    border: var(--border-crimson);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-family: monospace;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: center;
+  }
+  
+  /* --------------------------------------------------------------------------
+     10. RESPONSIVIDADE (MOBILE / TABLET)
+     -------------------------------------------------------------------------- */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 {
+      grid-template-columns: 1fr;
+    }
+    
+    header {
+      padding: 0.8rem 1rem;
+    }
+  
+    .logo-text {
+      font-size: 1.4rem;
+    }
+  
+    .score-number {
+      font-size: 3.5rem;
+    }
+  }

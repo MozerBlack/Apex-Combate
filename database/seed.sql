@@ -2,11 +2,11 @@
 -- DADOS INICIAIS DE TESTE (SEED) - APEX COMBATE
 -- ============================================================
 
--- 1. ORGANIZAÇÕES E EQUIPES
-INSERT INTO organizacoes_equipes (nome_organizacao, sigla, tipo_organizacao, tecnico_responsavel, cidade_uf) VALUES
-('Confederação Brasileira de Karatê', 'CBK', 'FEDERACAO', 'Presidente CBK', 'Brasília/DF'),
-('Dojo Apex Combate', 'APEX', 'DOJO', 'Mestre Ryusaki', 'Curitiba/PR'),
-('Associação Shoto-Kan', 'ASK', 'DOJO', 'Sensei Tanaka', 'São Paulo/SP');
+-- 1. ORGANIZAÇÕES E EQUIPES (Incluindo logins e dados de contato dos Clubes)
+INSERT INTO organizacoes_equipes (nome_organizacao, sigla, tipo_organizacao, tecnico_responsavel, cidade_uf, usuario, email, telefone, senha_hash) VALUES
+('Confederação Brasileira de Karatê', 'CBK', 'FEDERACAO', 'Presidente CBK', 'Brasília/DF', 'cbk_master', 'contato@cbk.org.br', '5561999990000', '$2b$12$hash...exemplo'),
+('Dojo Apex Combate', 'APEX', 'DOJO', 'Mestre Ryusaki', 'Curitiba/PR', 'clube.apex', 'contato@apexdojo.com', '5541988881111', '$2b$12$hash...exemplo'),
+('Associação Shoto-Kan', 'ASK', 'DOJO', 'Sensei Tanaka', 'São Paulo/SP', 'clube.shotokan', 'contato@shotokan.com', '5511977772222', '$2b$12$hash...exemplo');
 
 -- 2. MODALIDADES
 INSERT INTO modalidades (nome_modalidade, sigla, tipo_pontuacao, tipo_area_padrao) VALUES
@@ -16,13 +16,16 @@ INSERT INTO modalidades (nome_modalidade, sigla, tipo_pontuacao, tipo_area_padra
 ('Muay Thai', 'MT', 'Rounds_Decisao_KO', 'Ringue'),
 ('MMA', 'MMA', 'Rounds_Submissao_KO', 'Octogono');
 
--- 3. PESSOAS / USUÁRIOS (Atletas possuem CPF e Data de Nascimento obrigatórios)
-INSERT INTO pessoas_usuarios (nome_completo, cpf, data_nascimento, email, senha_hash, tipo_perfil, id_organizacao, genero, registro_federacao) VALUES
-('João Mozer', '12345678900', '2000-05-15', 'joao.mozer@email.com', NULL, 'ATLETA', 2, 'Masculino', 'CBK-45892'),
-('Danilo Emanuel', '98765432100', '1998-10-20', NULL, NULL, 'ATLETA', 3, 'Masculino', 'CBK-99821'),
-('Mestre Ryusaki', '23456789011', '1980-03-22', 'ryusaki@apexdojo.com', '$2b$12$hash...exemplo', 'TECNICO', 2, 'Masculino', 'COACH-2026'),
-('Carlos Silva', '34567890122', '1992-08-10', 'carlos.mesario@cbk.org.br', '$2b$12$hash...exemplo', 'MESARIO', 1, 'Masculino', 'REF-0091'),
-('Admin CBK', '45678901233', '1975-11-05', 'admin@cbk.org.br', '$2b$12$hash...exemplo', 'ADMIN', 1, 'Masculino', 'FED-0001');
+-- 3. PESSOAS / USUÁRIOS
+-- Atletas: CPF (login) + Data Nasc (senha). 
+-- Federação: Presidente (PRES-01 com 2FA) e Admin (admin@federacao).
+INSERT INTO pessoas_usuarios (nome_completo, cpf, data_nascimento, email, telefone, identificador_master, senha_hash, tipo_perfil, id_organizacao, genero, registro_federacao) VALUES
+('João Mozer', '12345678900', '2000-05-15', 'joao.mozer@email.com', '5541999991111', NULL, NULL, 'ATLETA', 2, 'Masculino', 'CBK-45892'),
+('Danilo Emanuel', '98765432100', '1998-10-20', 'danilo@email.com', '5541999992222', NULL, NULL, 'ATLETA', 3, 'Masculino', 'CBK-99821'),
+('Mestre Ryusaki', '23456789011', '1980-03-22', 'ryusaki@apexdojo.com', '5541988881111', NULL, '$2b$12$hash...exemplo', 'TECNICO', 2, 'Masculino', 'COACH-2026'),
+('Carlos Silva', '34567890122', '1992-08-10', 'carlos.mesario@cbk.org.br', '5561999993333', NULL, '$2b$12$hash...exemplo', 'MESARIO', 1, 'Masculino', 'REF-0091'),
+('Equipe Operacional Admin', '45678901233', '1990-01-01', 'admin@federacao.com', '5561988884444', 'admin@federacao', '$2b$12$hash...exemplo', 'ADMIN', 1, 'Masculino', 'FED-ADMIN'),
+('Presidente Apex Master', '56789012344', '1975-11-05', 'presidente@federacao.com', '5561999995555', 'PRES-01', '$2b$12$hash...exemplo', 'PRESIDENTE', 1, 'Masculino', 'FED-PRES');
 
 -- 4. GRADUAÇÕES DOS ATLETAS
 INSERT INTO graduacoes (id_pessoa, id_modalidade, nome_faixa, divisao_nivel) VALUES

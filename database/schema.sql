@@ -1,26 +1,32 @@
 -- ============================================================
--- APEX COMBATE — BANCO DE DADOS UNIFICADO (8 TABELAS)
+-- APEX COMBATE — BANCO DE DADOS UNIFICADO (10 TABELAS)
 -- ============================================================
 
--- 1. ORGANIZAÇÕES E EQUIPES (Criada antes para referência de FK)
+-- 1. ORGANIZAÇÕES E EQUIPES (Federação e Clubes/Dojos)
 CREATE TABLE organizacoes_equipes (
     id_organizacao SERIAL PRIMARY KEY,
     nome_organizacao VARCHAR(100) NOT NULL,
     sigla VARCHAR(20),
     tipo_organizacao VARCHAR(20) CHECK (tipo_organizacao IN ('FEDERACAO', 'DOJO')),
     tecnico_responsavel VARCHAR(100),
-    cidade_uf VARCHAR(50)
+    cidade_uf VARCHAR(50),
+    usuario VARCHAR(50) UNIQUE,              -- Login único do Clube
+    email VARCHAR(100) UNIQUE,                -- E-mail do Clube
+    telefone VARCHAR(20),                     -- Celular para WhatsApp/SMS
+    senha_hash VARCHAR(255)                   -- Senha do Clube
 );
 
--- 2. PESSOAS E USUÁRIOS (Atletas logam com CPF + Data de Nascimento)
+-- 2. PESSOAS E USUÁRIOS (Atletas, Admins, Presidente)
 CREATE TABLE pessoas_usuarios (
     id_pessoa SERIAL PRIMARY KEY,
     nome_completo VARCHAR(100) NOT NULL,
-    cpf VARCHAR(14) UNIQUE NOT NULL,
-    data_nascimento DATE NOT NULL,
-    email VARCHAR(100) UNIQUE,              -- Opcional (apenas se desejar cadastrar)
-    senha_hash VARCHAR(255),                 -- Opcional (usado para ADMIN/MESARIO)
-    tipo_perfil VARCHAR(30) DEFAULT 'ATLETA' CHECK (tipo_perfil IN ('ATLETA', 'TECNICO', 'MESARIO', 'ADMIN')),
+    cpf VARCHAR(14) UNIQUE NOT NULL,          -- Login do Atleta
+    data_nascimento DATE NOT NULL,            -- Senha do Atleta
+    email VARCHAR(100) UNIQUE,
+    telefone VARCHAR(20),                     -- Telefone para 2FA do Presidente/Admin
+    identificador_master VARCHAR(50) UNIQUE,  -- 'PRES-01' ou 'admin@federacao'
+    senha_hash VARCHAR(255),                  -- Senha master e admin
+    tipo_perfil VARCHAR(30) DEFAULT 'ATLETA' CHECK (tipo_perfil IN ('ATLETA', 'TECNICO', 'MESARIO', 'ADMIN', 'PRESIDENTE')),
     id_organizacao INT REFERENCES organizacoes_equipes(id_organizacao),
     genero VARCHAR(10),
     registro_federacao VARCHAR(30),
@@ -93,4 +99,25 @@ CREATE TABLE confrontos_chave (
     status_luta VARCHAR(25) DEFAULT 'AGUARDANDO',
     id_vencedor INT REFERENCES pessoas_usuarios(id_pessoa),
     metodo_vitoria VARCHAR(30)
+);
+
+-- 9. ADICIONADA: CÓDIGOS DE VERIFICAÇÃO 2FA / OTP
+CREATE TABLE codigos_otp (
+    id_otp SERIAL PRIMARY KEY,
+    identificador_usuario VARCHAR(100) NOT NULL, -- E-mail, ID ou Usuário
+    codigo_hash VARCHAR(255) NOT NULL,
+    tipo_perfil VARCHAR(30) NOT NULL,
+    expira_em TIMESTAMP NOT NULL,
+    usado BOOLEAN DEFAULT FALSE,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 10. ADICIONADA: LOGS E NOTIFICAÇÕES DE ACESSO
+CREATE TABLE logs_acesso (
+    id_log SERIAL PRIMARY KEY,
+    usuario_tentativa VARCHAR(100) NOT NULL,
+    tipo_perfil VARCHAR(30) NOT NULL,
+    status_evento VARCHAR(30) NOT NULL, -- 'LOGIN_SUCESSO', 'SENHA_INCORRETA', 'OTP_SOLICITADO'
+    ip_origem VARCHAR(45),
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
