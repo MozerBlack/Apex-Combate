@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex Combate — Login & Portal Oficial</title>
+  <title>Apex Combate — Login & Painel do Atleta</title>
   
-  <!-- Fontes do Google -->
+  <!-- Fontes do Google (Plus Jakarta Sans & Montserrat) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -14,18 +14,16 @@
 </head>
 <body>
 
-  <!-- Banner Superior de Notificações em Tempo Real -->
-  <div id="banner-alerta" class="banner hidden"></div>
-
   <header>
     <a href="index.html" class="header-logo-container">
       <span class="logo-text">APEX <span>COMBATE</span></span>
     </a>
     
-    <nav style="display: flex; gap: 0.8rem;">
+    <nav style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
       <a href="index.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">Início</a>
       <a href="placar.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Placar Live</a>
       <a href="perfil.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Área do Atleta</a>
+      <a href="dashboard.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Dashboard</a>
     </nav>
   </header>
 
@@ -33,59 +31,29 @@
     
     <!-- BANNER DE BOAS-VINDAS -->
     <section class="card" style="margin-bottom: 2rem; text-align: center; border-color: rgba(225, 29, 72, 0.3);">
-      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--text-main);">PORTAL DE ACESSO</h1>
-      <p style="color: var(--text-muted); font-size: 1rem;">Acesse sua conta para consultar chaves, gerenciar equipes ou administrar campeonatos.</p>
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--text-main);">ÁREA DO ATLETA</h1>
+      <p style="color: var(--text-muted); font-size: 1rem;">Acesse sua conta para consultar chaves, horários de luta, carteirinha e pagamentos.</p>
     </section>
 
     <div class="grid-2">
       
-      <!-- FORMULÁRIO DE LOGIN PRINCIPAL -->
-      <div class="card" id="card-login-principal" style="border-top: 4px solid var(--crimson-primary);">
+      <!-- FORMULÁRIO DE LOGIN SIMPLIFICADO -->
+      <div class="card" style="border-top: 4px solid var(--crimson-primary);">
+        <h2 style="margin-bottom: 1.2rem; font-size: 1.3rem;">Acessar Conta</h2>
         
-        <!-- Seleção de Perfil por Abas -->
-        <div class="abas-login" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-          <button type="button" class="aba-btn active" data-perfil="atleta">Atleta</button>
-          <button type="button" class="aba-btn" data-perfil="clube">Clube</button>
-          <button type="button" class="aba-btn" data-perfil="federacao">Federação</button>
-        </div>
-
-        <h2 id="titulo-login" style="margin-bottom: 1.2rem; font-size: 1.3rem;">Acessar Conta</h2>
-        
-        <form id="form-login">
+        <form id="login-form">
           <div class="input-group">
-            <label id="label-usuario" for="usuario">CPF do Atleta</label>
-            <input type="text" id="usuario" name="usuario" placeholder="000.000.000-00" maxlength="50" required autocomplete="username">
+            <label for="cpf">CPF do Atleta</label>
+            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required autocomplete="off">
           </div>
 
-          <div class="input-group" id="group-senha">
-            <label id="label-senha" for="senha">Data de Nascimento</label>
-            <input type="date" id="senha" name="senha" required autocomplete="current-password">
+          <div class="input-group">
+            <label for="data_nascimento">Data de Nascimento</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" required>
           </div>
 
-          <button type="submit" id="btn-entrar" class="btn" style="margin-top: 0.5rem; width: 100%;">ENTRAR NO SISTEMA ➔</button>
+          <button type="submit" class="btn" style="margin-top: 0.5rem;">ENTRAR NO SISTEMA</button>
         </form>
-
-        <!-- Acesso Alternativo do Clube (Entrar via Código) -->
-        <div id="opcoes-clube" class="links-auxiliares hidden" style="margin-top: 1rem; text-align: center;">
-          <button type="button" id="btn-solicitar-codigo" class="btn-link" style="background: none; border: none; color: var(--text-muted); text-decoration: underline; cursor: pointer; font-size: 0.85rem;">
-            Entrar com Código (WhatsApp / SMS / E-mail)
-          </button>
-        </div>
-      </div>
-
-      <!-- CARD DE VALIDAÇÃO OTP 2FA (Inicia Oculto) -->
-      <div class="card hidden" id="card-otp" style="border-top: 4px solid var(--crimson-primary);">
-        <h2 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Código de Segurança</h2>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.2rem;">
-          Digite o código de 6 dígitos enviado para o WhatsApp, SMS e E-mail cadastrados.
-        </p>
-
-        <div class="input-group">
-          <input type="text" id="codigo-otp" maxlength="6" placeholder="123456" style="text-align: center; font-size: 1.5rem; letter-spacing: 6px; font-weight: bold;">
-        </div>
-
-        <button type="button" id="btn-validar-otp" class="btn" style="width: 100%; margin-top: 0.5rem;">VALIDAR E ACESSAR ➔</button>
-        <button type="button" id="btn-voltar-login" class="btn" style="width: 100%; margin-top: 0.5rem; background-color: var(--bg-card);">Voltar ao Login</button>
       </div>
 
       <!-- CARDS DE ATALHO RÁPIDO DO EVENTO -->

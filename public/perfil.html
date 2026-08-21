@@ -14,19 +14,16 @@
 </head>
 <body>
 
-  <!-- Banner Superior de Alertas -->
-  <div id="banner-alerta" class="banner hidden"></div>
-
   <header>
     <a href="index.html" class="header-logo-container">
       <span class="logo-text">APEX <span>COMBATE</span></span>
     </a>
     
-    <nav style="display: flex; gap: 0.8rem; align-items: center;">
+    <nav style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
       <a href="index.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Início</a>
       <a href="placar.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Placar Live</a>
       <a href="perfil.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">Área do Atleta</a>
-      <button id="btn-logout" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--crimson-primary);">Sair</button>
+      <a href="dashboard.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Dashboard</a>
     </nav>
   </header>
 
@@ -42,21 +39,21 @@
             🥋
           </div>
 
-          <!-- Informações Cadastrais (IDs adicionados para preenchimento via JS) -->
+          <!-- Informações Cadastrais -->
           <div>
             <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.3rem;">
-              <h1 id="atleta-nome" style="font-size: 1.8rem; color: var(--text-main); font-family: 'Montserrat', sans-serif;">João Mozer</h1>
-              <span id="atleta-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 20px; font-weight: 700;">REGULAR</span>
+              <h1 style="font-size: 1.8rem; color: var(--text-main); font-family: 'Montserrat', sans-serif;">João Mozer</h1>
+              <span style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 20px; font-weight: 700;">REGULAR</span>
             </div>
             
-            <p id="atleta-faixa-clube" style="color: var(--gold-apex); font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem;">
+            <p style="color: var(--gold-apex); font-weight: 700; font-size: 1rem; margin-bottom: 0.8rem;">
               Faixa Preta • Apex Dojo Team
             </p>
             
             <div style="display: flex; gap: 1.2rem; flex-wrap: wrap; color: var(--text-muted); font-size: 0.85rem;">
-              <span><strong>Categoria:</strong> <span id="atleta-categoria">Senior (-75kg)</span></span>
-              <span><strong>Modalidade:</strong> <span id="atleta-modalidade">Karate Kumite</span></span>
-              <span><strong>ID Atleta:</strong> <span id="atleta-id">#APX-2026-88</span></span>
+              <span><strong>Categoria:</strong> Senior (-75kg)</span>
+              <span><strong>Modalidade:</strong> Karate Kumite</span>
+              <span><strong>ID Atleta:</strong> #APX-2026-88</span>
             </div>
           </div>
         </div>
@@ -64,7 +61,8 @@
         <!-- Área do QR Code da Carteirinha -->
         <div style="background: var(--bg-dark); padding: 0.8rem; border-radius: 8px; border: var(--border-subtle); text-align: center; min-width: 120px;">
           <div style="background: #ffffff; padding: 0.5rem; border-radius: 4px; display: inline-block;">
-            <img id="atleta-qrcode" src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=APX-2026-88" alt="QR Code Atleta" style="display: block;">
+            <!-- Simulação de QR Code para validação na entrada/pesagem -->
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=APX-2026-88" alt="QR Code Atleta" style="display: block;">
           </div>
           <span style="display: block; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.4rem; font-weight: 600;">CARTEIRINHA DIGITAL</span>
         </div>
@@ -77,17 +75,17 @@
       
       <div class="card" style="text-align: center;">
         <h3 style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem;">Lutas Totais</h3>
-        <p id="stat-lutas" style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--text-main);">24</p>
+        <p style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--text-main);">24</p>
       </div>
 
       <div class="card" style="text-align: center;">
         <h3 style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem;">Vitórias</h3>
-        <p id="stat-vitorias" style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #22c55e;">21</p>
+        <p style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #22c55e;">21</p>
       </div>
 
       <div class="card" style="text-align: center;">
         <h3 style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.4rem;">Aproveitamento</h3>
-        <p id="stat-aproveitamento" style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--gold-apex);">87.5%</p>
+        <p style="font-size: 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--gold-apex);">87.5%</p>
       </div>
 
     </div>
@@ -96,7 +94,7 @@
     <div class="card">
       <h2 style="margin-bottom: 1.2rem; font-size: 1.3rem;">Histórico Recente</h2>
       
-      <div id="historico-container" style="display: flex; flex-direction: column; gap: 0.8rem;">
+      <div style="display: flex; flex-direction: column; gap: 0.8rem;">
         
         <div style="padding: 1rem; background: var(--bg-dark); border-radius: 8px; border-left: 4px solid #22c55e; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
           <div>

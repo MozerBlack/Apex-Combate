@@ -14,18 +14,16 @@
 </head>
 <body>
 
-  <!-- Banner Superior de Notificações em Tempo Real -->
-  <div id="banner-alerta" class="banner hidden"></div>
-
   <header>
     <a href="index.html" class="header-logo-container">
       <span class="logo-text">APEX <span>COMBATE</span></span>
     </a>
     
-    <nav style="display: flex; gap: 0.8rem;">
+    <nav style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
       <a href="index.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Início</a>
       <a href="placar.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">Placar Live</a>
       <a href="perfil.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Área do Atleta</a>
+      <a href="dashboard.html" class="btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; background-color: var(--bg-card);">Dashboard</a>
     </nav>
   </header>
 
@@ -34,12 +32,12 @@
     <!-- CABEÇALHO DA QUADRA E CATEGORIA -->
     <section class="card" style="margin-bottom: 1.5rem; text-align: center; border-color: rgba(225, 29, 72, 0.3);">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
-        <span id="info-quadra" style="background: var(--crimson-primary); color: #fff; padding: 0.2rem 0.8rem; border-radius: 4px; font-weight: 700; font-size: 0.85rem;">QUADRA 2</span>
-        <span id="info-fase" style="color: var(--gold-apex); font-weight: 700; font-size: 0.9rem;">LUTA 3ª (QUARTAS DE FINAL)</span>
-        <span id="info-horario" style="color: var(--text-muted); font-size: 0.85rem;">PREVISTO: 16:02</span>
+        <span style="background: var(--crimson-primary); color: #fff; padding: 0.2rem 0.8rem; border-radius: 4px; font-weight: 700; font-size: 0.85rem;">QUADRA 2</span>
+        <span style="color: var(--gold-apex); font-weight: 700; font-size: 0.9rem;">LUTA 3ª (QUARTAS DE FINAL)</span>
+        <span style="color: var(--text-muted); font-size: 0.85rem;">PREVISTO: 16:02</span>
       </div>
-      <h1 id="info-categoria" style="font-size: 1.5rem; color: var(--text-main); font-family: 'Montserrat', sans-serif;">SENIOR MASCULINO (-75 KG)</h1>
-      <p id="info-subcategoria" style="color: var(--text-muted); font-size: 0.85rem;">7.KYU AO 3.KYU • KUMITE</p>
+      <h1 style="font-size: 1.5rem; color: var(--text-main); font-family: 'Montserrat', sans-serif;">SENIOR MASCULINO (-75 KG)</h1>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">7.KYU AO 3.KYU • KUMITE</p>
     </section>
 
     <!-- PAINEL CENTRAL DE CRONÔMETRO -->
@@ -55,28 +53,28 @@
       <!-- CANTO VERMELHO (AKA) -->
       <div class="card card-aka" style="text-align: center;">
         <span style="background: var(--red-combate); color: #fff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-bottom: 0.8rem;">AKA (VERMELHO)</span>
-        <h2 id="aka-nome" style="font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem;">DANILO EMANUEL</h2>
-        <p id="aka-equipe" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">RYUZOKAN</p>
+        <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem;">DANILO EMANUEL</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">RYUZOKAN</p>
         
-        <div id="aka-placar" class="score-number" style="color: var(--red-combate);">4</div>
+        <div class="score-number" style="color: var(--red-combate);">4</div>
         
         <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <span id="aka-c1" style="background: rgba(239, 68, 68, 0.2); color: var(--red-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C1: 1</span>
-          <span id="aka-c2" style="background: rgba(239, 68, 68, 0.2); color: var(--red-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C2: 0</span>
+          <span style="background: rgba(239, 68, 68, 0.2); color: var(--red-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C1: 1</span>
+          <span style="background: rgba(239, 68, 68, 0.2); color: var(--red-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C2: 0</span>
         </div>
       </div>
 
       <!-- CANTO AZUL (AO) -->
       <div class="card card-ao" style="text-align: center;">
         <span style="background: var(--blue-combate); color: #fff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-bottom: 0.8rem;">AO (AZUL)</span>
-        <h2 id="ao-nome" style="font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem;">RHUAN ALEHANDRO</h2>
-        <p id="ao-equipe" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">EQUIPE FENIX KARATE</p>
+        <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem;">RHUAN ALEHANDRO</h2>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">EQUIPE FENIX KARATE</p>
         
-        <div id="ao-placar" class="score-number" style="color: var(--blue-combate);">2</div>
+        <div class="score-number" style="color: var(--blue-combate);">2</div>
         
         <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <span id="ao-c1" style="background: rgba(59, 130, 246, 0.2); color: var(--blue-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C1: 0</span>
-          <span id="ao-c2" style="background: rgba(59, 130, 246, 0.2); color: var(--blue-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C2: 1</span>
+          <span style="background: rgba(59, 130, 246, 0.2); color: var(--blue-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C1: 0</span>
+          <span style="background: rgba(59, 130, 246, 0.2); color: var(--blue-combate); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">C2: 1</span>
         </div>
       </div>
 
@@ -87,13 +85,13 @@
       <h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 0.8rem; text-transform: uppercase;">Próximo Confronto na Quadra</h3>
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <strong id="prox-atleta-red" style="color: var(--text-main);">JOAO VICTOR MOZER DOS SANTOS</strong>
-          <span id="prox-equipe-red" style="color: var(--text-muted); font-size: 0.85rem; display: block;">ARAUCARIA</span>
+          <strong style="color: var(--text-main);">JOAO VICTOR MOZER DOS SANTOS</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem; display: block;">ARAUCARIA</span>
         </div>
         <span style="color: var(--crimson-primary); font-weight: 800;">VS</span>
         <div style="text-align: right;">
-          <strong id="prox-atleta-blue" style="color: var(--text-main);">RICARDO STRESSER CORDEIRO</strong>
-          <span id="prox-equipe-blue" style="color: var(--text-muted); font-size: 0.85rem; display: block;">KARATE PIRAQUARA</span>
+          <strong style="color: var(--text-main);">RICARDO STRESSER CORDEIRO</strong>
+          <span style="color: var(--text-muted); font-size: 0.85rem; display: block;">KARATE PIRAQUARA</span>
         </div>
       </div>
     </div>

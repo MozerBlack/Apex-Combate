@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Combate — Dashboard Admin</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <div class="logo-text-sidebar">
+          <span class="logo-apex">APEX</span>
+          <span class="logo-combate">COMBATE</span>
+        </div>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item active">
+        <span class="nav-icon">🏠</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">🏆</span>
+        <span>Campeonatos</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">🥋</span>
+        <span>Atletas</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">🛡️</span>
+        <span>Equipes / Dojos</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Resultados</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">⭐</span>
+        <span>Rankings</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📅</span>
+        <span>Calendário</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📰</span>
+        <span>Notícias</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">👨‍⚖️</span>
+        <span>Árbitros / Mesários</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📍</span>
+        <span>Áreas / Quadras</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">📄</span>
+        <span>Relatórios</span>
+      </a>
+      <a href="#" class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        <span>Configurações</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" class="nav-item public-link">
+        <span class="nav-icon">↗</span>
+        <span>Ver Site Público</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="dashboard-main">
+    
+    <!-- TOP HEADER -->
+    <header class="dashboard-header">
+      <div class="header-left">
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">☰</button>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Buscar campeonatos, atletas, equipes...">
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <button class="header-icon-btn" title="Mensagens">✉️</button>
+        <button class="header-icon-btn" title="Notificações">
+          🔔
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">JM</div>
+          <div class="user-info">
+            <span class="user-name">João Mozer</span>
+            <span class="user-role">Administrador</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD CONTENT -->
+    <main class="dashboard-content">
+      
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="welcome-text">Bem-vindo de volta, João</p>
+        </div>
+        <div class="season-selector">
+          <select>
+            <option>Temporada 2026</option>
+            <option>Temporada 2025</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- STATS CARDS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">CAMPEONATOS</span>
+            <span class="stat-value">24</span>
+            <span class="stat-change positive">↑ 12% vs temporada anterior</span>
+          </div>
+          <div class="stat-icon">🏆</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">ATLETAS</span>
+            <span class="stat-value">1.248</span>
+            <span class="stat-change positive">↑ 8% vs temporada anterior</span>
+          </div>
+          <div class="stat-icon">🥋</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">EQUIPES / DOJOS</span>
+            <span class="stat-value">156</span>
+            <span class="stat-change positive">↑ 15% vs temporada anterior</span>
+          </div>
+          <div class="stat-icon">🛡️</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">LUTAS</span>
+            <span class="stat-value">342</span>
+            <span class="stat-change positive">↑ 10% vs temporada anterior</span>
+          </div>
+          <div class="stat-icon">⚔️</div>
+        </div>
+      </div>
+
+      <!-- MIDDLE SECTION -->
+      <div class="dashboard-grid-2">
+        
+        <!-- CHART -->
+        <div class="card chart-card">
+          <div class="card-header">
+            <h2>Visão Geral de Campeonatos</h2>
+            <select class="period-select">
+              <option>Mensal</option>
+              <option>Trimestral</option>
+              <option>Anual</option>
+            </select>
+          </div>
+          <div class="chart-placeholder">
+            <div class="chart-line">
+              <svg viewBox="0 0 400 160" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e11d48" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#e11d48" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,120 L33,110 L66,115 L100,95 L133,100 L166,85 L200,90 L233,70 L266,75 L300,55 L333,50 L366,35 L400,30" 
+                      fill="none" stroke="#e11d48" stroke-width="2.5"/>
+                <path d="M0,120 L33,110 L66,115 L100,95 L133,100 L166,85 L200,90 L233,70 L266,75 L300,55 L333,50 L366,35 L400,30 L400,160 L0,160 Z" 
+                      fill="url(#chartGradient)"/>
+                <circle cx="166" cy="85" r="5" fill="#e11d48"/>
+                <text x="166" y="68" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="600">Mai</text>
+                <text x="166" y="52" text-anchor="middle" fill="#e11d48" font-size="12" font-weight="700">28 Campeonatos</text>
+              </svg>
+            </div>
+            <div class="chart-labels">
+              <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span>
+              <span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span>
+              <span>Nov</span><span>Dez</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- UPCOMING -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Próximos Campeonatos</h2>
+            <a href="#" class="view-all">Ver todos</a>
+          </div>
+          <div class="upcoming-list">
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <span class="month">MAI</span>
+                <span class="days">24-26</span>
+              </div>
+              <div class="upcoming-info">
+                <strong>Open Internacional Apex Combate 2026</strong>
+                <span>Ginásio do Tarumã • Curitiba/PR</span>
+              </div>
+              <div class="upcoming-meta">
+                <span class="participants">180 atletas</span>
+              </div>
+            </div>
+
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <span class="month">JUN</span>
+                <span class="days">07-09</span>
+              </div>
+              <div class="upcoming-info">
+                <strong>Copa Júnior de Karatê</strong>
+                <span>Arena Riverside • São Paulo/SP</span>
+              </div>
+              <div class="upcoming-meta">
+                <span class="participants">320 atletas</span>
+              </div>
+            </div>
+
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <span class="month">JUN</span>
+                <span class="days">14-16</span>
+              </div>
+              <div class="upcoming-info">
+                <strong>Campeonato Brasileiro de BJJ</strong>
+                <span>Centro Aquático • Rio de Janeiro/RJ</span>
+              </div>
+              <div class="upcoming-meta">
+                <span class="participants">200 atletas</span>
+              </div>
+            </div>
+
+            <div class="upcoming-item">
+              <div class="upcoming-date">
+                <span class="month">JUN</span>
+                <span class="days">21-23</span>
+              </div>
+              <div class="upcoming-info">
+                <strong>Liga Senior de Muay Thai</strong>
+                <span>Complexo Indoor • Belo Horizonte/MG</span>
+              </div>
+              <div class="upcoming-meta">
+                <span class="participants">160 atletas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM SECTION -->
+      <div class="dashboard-grid-2">
+        
+        <!-- BRACKETS -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Chaves do Campeonato</h2>
+            <a href="#" class="view-all">Ver todas</a>
+          </div>
+          
+          <div class="bracket-selector">
+            <select>
+              <option>Open Internacional Apex Combate 2026</option>
+              <option>Copa Júnior de Karatê</option>
+            </select>
+          </div>
+
+          <div class="bracket-stages">
+            <div class="stage">
+              <span class="stage-name">Oitavas</span>
+              <span class="stage-date">24 Mai</span>
+            </div>
+            <div class="stage">
+              <span class="stage-name">Quartas</span>
+              <span class="stage-date">24 Mai</span>
+            </div>
+            <div class="stage">
+              <span class="stage-name">Semifinais</span>
+              <span class="stage-date">25 Mai</span>
+            </div>
+            <div class="stage final">
+              <span class="stage-name">Final</span>
+              <span class="stage-date">26 Mai</span>
+            </div>
+          </div>
+
+          <div class="mini-bracket">
+            <div class="bracket-round">
+              <div class="match-pair">
+                <div class="athlete-slot">J. Mozer</div>
+                <div class="athlete-slot">D. Emanuel</div>
+              </div>
+              <div class="match-pair">
+                <div class="athlete-slot">R. Alehandro</div>
+                <div class="athlete-slot">C. Silva</div>
+              </div>
+              <div class="match-pair">
+                <div class="athlete-slot">T. Tanaka</div>
+                <div class="athlete-slot">M. Ryusaki</div>
+              </div>
+              <div class="match-pair">
+                <div class="athlete-slot">A. Parker</div>
+                <div class="athlete-slot">S. Morgan</div>
+              </div>
+            </div>
+            <div class="bracket-round">
+              <div class="match-pair empty">
+                <div class="athlete-slot placeholder">—</div>
+                <div class="athlete-slot placeholder">—</div>
+              </div>
+              <div class="match-pair empty">
+                <div class="athlete-slot placeholder">—</div>
+                <div class="athlete-slot placeholder">—</div>
+              </div>
+            </div>
+            <div class="bracket-round">
+              <div class="match-pair empty">
+                <div class="athlete-slot placeholder">—</div>
+                <div class="athlete-slot placeholder">—</div>
+              </div>
+            </div>
+            <div class="bracket-champion">
+              <div class="champion-box">
+                <span class="trophy-icon">🏆</span>
+                <span>Campeão</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISTRIBUTION -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Distribuição de Atletas</h2>
+          </div>
+          
+          <div class="distribution-content">
+            <div class="donut-chart">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#1e293b" stroke-width="18"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#e11d48" stroke-width="18"
+                        stroke-dasharray="70.7 212.1" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#f59e0b" stroke-width="18"
+                        stroke-dasharray="56.5 226.3" stroke-dashoffset="-70.7" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#3b82f6" stroke-width="18"
+                        stroke-dasharray="42.4 240.4" stroke-dashoffset="-127.2" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#22c55e" stroke-width="18"
+                        stroke-dasharray="33.9 248.9" stroke-dashoffset="-169.6" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#a855f7" stroke-width="18"
+                        stroke-dasharray="22.6 260.2" stroke-dashoffset="-203.5" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="45" fill="none" stroke="#64748b" stroke-width="18"
+                        stroke-dasharray="56.5 226.3" stroke-dashoffset="-226.1" transform="rotate(-90 60 60)"/>
+              </svg>
+              <div class="donut-center">
+                <span class="donut-total">1.248</span>
+                <span class="donut-label">Total</span>
+              </div>
+            </div>
+
+            <div class="distribution-legend">
+              <div class="legend-item">
+                <span class="legend-color" style="background:#e11d48"></span>
+                <span class="legend-name">Karatê</span>
+                <span class="legend-pct">25%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background:#f59e0b"></span>
+                <span class="legend-name">Jiu-Jitsu</span>
+                <span class="legend-pct">20%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background:#3b82f6"></span>
+                <span class="legend-name">Judô</span>
+                <span class="legend-pct">15%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background:#22c55e"></span>
+                <span class="legend-name">Muay Thai</span>
+                <span class="legend-pct">12%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background:#a855f7"></span>
+                <span class="legend-name">MMA</span>
+                <span class="legend-pct">8%</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background:#64748b"></span>
+                <span class="legend-name">Outros</span>
+                <span class="legend-pct">20%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    if (menuBtn && sidebar) {
+      menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  </script>
+</body>
+</html>
