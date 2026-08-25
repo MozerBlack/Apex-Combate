@@ -933,3 +933,410 @@ main, .container {
     gap: 1rem;
   }
 }
+
+
+/* ==========================================================================
+   LOGIN PAGE — APEX COMBATE (100% fiel ao mock)
+   ========================================================================== */
+
+.login-page {
+  min-height: 100vh;
+  background: #0a0e17;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Formas geométricas vermelhas laterais (como na imagem) */
+.deco-shape {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  background: linear-gradient(145deg, #e11d48 0%, #7f1d1d 100%);
+  opacity: 0.18;
+  border-radius: 18px;
+  transform: rotate(28deg);
+  z-index: 0;
+  pointer-events: none;
+  box-shadow: 0 0 60px rgba(225, 29, 72, 0.15);
+}
+
+.deco-left {
+  top: 18%;
+  left: -90px;
+}
+
+.deco-right {
+  bottom: 12%;
+  right: -90px;
+}
+
+/* Header */
+.login-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: transparent;
+}
+
+.login-header-logo {
+  text-decoration: none;
+}
+
+.header-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 1.5px;
+  color: #f8fafc;
+  text-transform: uppercase;
+}
+
+.header-logo-text span {
+  color: #e11d48;
+}
+
+.login-nav {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.login-nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.login-nav a:hover {
+  color: #f8fafc;
+}
+
+.login-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.btn-menu-icon {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #94a3b8;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: none;
+}
+
+.btn-login-header {
+  background: #e11d48;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  padding: 0.55rem 1.25rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-login-header:hover {
+  background: #be123c;
+  box-shadow: 0 0 18px rgba(225, 29, 72, 0.45);
+}
+
+/* Área central */
+.login-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Card de login */
+.login-card {
+  background: linear-gradient(165deg, #161d2e 0%, #0e131c 100%);
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  border-radius: 14px;
+  padding: 2.4rem 2rem 1.8rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow:
+    0 0 0 1px rgba(225, 29, 72, 0.08),
+    0 30px 60px -15px rgba(0, 0, 0, 0.75),
+    0 0 50px rgba(225, 29, 72, 0.07);
+  text-align: center;
+  position: relative;
+}
+
+/* Logo oficial no card */
+.login-logo {
+  margin-bottom: 1.2rem;
+}
+
+.logo-a-oficial {
+  width: 72px;
+  height: 65px;
+  margin: 0 auto 0.6rem;
+}
+
+.logo-a-oficial svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 16px rgba(225, 29, 72, 0.5));
+}
+
+.logo-text-oficial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.apex-oficial {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: #e8edf5;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.combate-oficial {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  letter-spacing: 5px;
+  margin-top: 0.15rem;
+  position: relative;
+  padding: 0 1.8rem;
+}
+
+.combate-oficial::before,
+.combate-oficial::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 2px;
+  background: #e11d48;
+  transform: translateY(-50%);
+}
+
+.combate-oficial::before { left: 0; }
+.combate-oficial::after { right: 0; }
+
+.login-card-label {
+  margin-top: 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.login-escolha {
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 1.3rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* Opções brancas (igual à imagem) */
+.login-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.login-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.85rem 1.15rem;
+  background: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+}
+
+.login-option:hover {
+  border-color: #e11d48;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.22);
+  transform: translateY(-1px);
+}
+
+.login-option.selected {
+  border-color: #e11d48;
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.25);
+  background: #fff;
+}
+
+.option-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.option-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #0f172a;
+  letter-spacing: 1.5px;
+}
+
+/* Botão vermelho principal */
+.btn-entrar-principal {
+  display: block;
+  width: 100%;
+  background: #e11d48;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  padding: 0.95rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.btn-entrar-principal:hover:not(:disabled) {
+  background: #be123c;
+  box-shadow: 0 0 28px rgba(225, 29, 72, 0.45);
+}
+
+.btn-entrar-principal:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Formulários */
+.login-form {
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+.login-form .input-group {
+  margin-bottom: 1rem;
+}
+
+.login-form .input-group label {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.login-form .input-group input {
+  width: 100%;
+  background: #0a0e17;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: #f8fafc;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.login-form .input-group input:focus {
+  border-color: #e11d48;
+}
+
+.btn-voltar {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.7rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  transition: color 0.2s;
+}
+
+.btn-voltar:hover {
+  color: #f8fafc;
+}
+
+.login-card-footer {
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: #475569;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-header {
+    padding: 1rem 1.2rem;
+  }
+
+  .login-nav {
+    display: none;
+  }
+
+  .btn-menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-card {
+    padding: 2rem 1.4rem 1.5rem;
+    max-width: 340px;
+  }
+
+  .apex-oficial {
+    font-size: 1.45rem;
+    letter-spacing: 3px;
+  }
+
+  .logo-a-oficial {
+    width: 58px;
+    height: 52px;
+  }
+
+  .deco-shape {
+    width: 140px;
+    height: 140px;
+    opacity: 0.12;
+  }
+}
