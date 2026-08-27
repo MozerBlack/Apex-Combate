@@ -1317,7 +1317,7 @@ main, .container {
   align-items: center;
 }
 
-.logo-img-oficial {
+.Logo.png {
   width: 180px;
   max-width: 70%;
   height: auto;
@@ -1362,7 +1362,7 @@ main, .container {
     letter-spacing: 3px;
   }
 
-  .logo-a-oficial {
+  .Logo.png {
     width: 58px;
     height: 52px;
   }
