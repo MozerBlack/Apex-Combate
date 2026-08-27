@@ -1,4 +1,12 @@
 {
+  "name": "apex-combate",
+  "version": "1.0.0",
+  "description": "Plataforma Universal de Gestão de Campeonatos de Artes Marciais",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
   "dependencies": {
     "express": "^5.2.1",
     "pg": "^8.23.0"
