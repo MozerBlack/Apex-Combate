@@ -15,107 +15,51 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // ============================================================
-// ROTAS DA API DE AUTENTICAÇÃO E PERFIS
+// ROTAS DA API
 // ============================================================
 
-// 1. LOGIN UNIFICADO (Atleta, Clube, Federação)
+// 1. LOGIN DE ATLETA (CPF + Data de Nascimento)
 app.post('/api/login', async (req, res) => {
-  const { cpf, data_nascimento, usuario, senha, perfil } = req.body;
+  const { cpf, data_nascimento } = req.body;
+
+  if (!cpf || !data_nascimento) {
+    return res.status(400).json({ error: 'CPF e Data de Nascimento são obrigatórios.' });
+  }
+
+  // Remove formatação (. e -) do CPF enviado
+  const cpfLimpo = cpf.replace(/\D/g, '');
 
   try {
-    // A. LÓGICA DE LOGIN PARA ATLETA
-    if (perfil === 'ATLETA' || cpf) {
-      if (!cpf || !data_nascimento) {
-        return res.status(400).json({ error: 'CPF e Data de Nascimento são obrigatórios.' });
-      }
+    const queryText = `
+      SELECT id_pessoa, nome_completo, cpf, data_nascimento, tipo_perfil, id_organizacao
+      FROM pessoas_usuarios
+      WHERE REPLACE(REPLACE(cpf, '.', ''), '-', '') = $1 
+        AND data_nascimento = $2
+    `;
+    
+    const result = await db.query(queryText, [cpfLimpo, data_nascimento]);
 
-      const cpfLimpo = cpf.replace(/\D/g, '');
-      const queryText = `
-        SELECT id_pessoa, nome_completo, cpf, data_nascimento, tipo_perfil, id_organizacao
-        FROM pessoas_usuarios
-        WHERE REPLACE(REPLACE(cpf, '.', ''), '-', '') = $1 
-          AND data_nascimento = $2
-      `;
-
-      const result = await db.query(queryText, [cpfLimpo, data_nascimento]);
-
-      if (result.rows.length === 0) {
-        return res.status(401).json({ error: 'Atleta não encontrado. Verifique seu CPF e Data de Nascimento.' });
-      }
-
-      return res.json({ message: 'Login realizado com sucesso!', usuario: result.rows[0] });
+    if (result.rows.length === 0) {
+      return res.status(401).json({ error: 'Atleta não encontrado. Verifique seu CPF e Data de Nascimento.' });
     }
 
-    // B. LÓGICA DE LOGIN PARA FEDERAÇÃO / PRESIDENTE MASTER (Exige 2FA)
-    if (perfil === 'federacao') {
-      const queryText = `
-        SELECT id_pessoa, nome_completo, tipo_perfil
-        FROM pessoas_usuarios
-        WHERE (cpf = $1 OR nome_completo ILIKE $1) AND tipo_perfil IN ('PRESIDENTE_MASTER', 'ADMIN')
-      `;
-      const result = await db.query(queryText, [usuario]);
-
-      if (result.rows.length > 0) {
-        // Sinaliza para o Frontend abrir a tela de validação OTP
-        return res.json({ status: '2FA_REQUIRED', message: 'Código de validação enviado.' });
-      }
-      return res.status(401).json({ error: 'Credenciais de administrador inválidas.' });
-    }
-
-    // C. LÓGICA DE LOGIN PARA CLUBE / ORGANIZAÇÃO
-    if (perfil === 'clube') {
-      const queryText = `
-        SELECT id_organizacao, nome_organizacao, sigla
-        FROM organizacoes_equipes
-        WHERE sigla ILIKE $1 OR nome_organizacao ILIKE $1
-      `;
-      const result = await db.query(queryText, [usuario]);
-
-      if (result.rows.length > 0) {
-        return res.json({ message: 'Login do clube realizado!', usuario: result.rows[0] });
-      }
-      return res.status(401).json({ error: 'Clube não encontrado.' });
-    }
-
-    return res.status(400).json({ error: 'Perfil de acesso não reconhecido.' });
-
+    const usuario = result.rows[0];
+    return res.json({ message: 'Login realizado com sucesso!', usuario });
   } catch (err) {
     console.error('Erro na rota de login:', err);
     return res.status(500).json({ error: 'Erro interno no servidor de autenticação.' });
   }
 });
 
-// 2. SOLICITAÇÃO E VALIDAÇÃO DE CÓDIGO OTP (2FA)
-app.post('/api/login/clube/solicitar-codigo', (req, res) => {
-  const { usuario } = req.body;
-  if (!usuario) {
-    return res.status(400).json({ error: 'Informe o usuário ou e-mail.' });
-  }
-  // Simulação de envio via WhatsApp / SMS / Email
-  return res.json({ message: 'Código temporário enviado com sucesso.' });
-});
-
-app.post('/api/login/validar-otp', (req, res) => {
-  const { codigo } = req.body;
-  
-  // Aceita código de teste ou qualquer código com 6 dígitos
-  if (codigo === '123456' || (codigo && codigo.length === 6)) {
-    return res.json({ message: 'Autenticação de 2 fatores aceita!', token: 'apex_session_token' });
-  }
-  return res.status(400).json({ error: 'Código inválido ou expirado.' });
-});
-
-// ============================================================
-// ROTAS DE DADOS (PERFIL E PLACAR)
-// ============================================================
-
-// 3. DADOS DO PERFIL DO ATLETA
+// 2. DADOS DO PERFIL DO ATLETA
 app.get('/api/atleta/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
     const queryText = `
-      SELECT p.id_pessoa, p.nome_completo, p.cpf, p.data_nascimento, o.nome_organizacao, o.sigla
+      SELECT p.id_pessoa, p.nome_completo, p.cpf, p.data_nascimento, 
+             p.tipo_perfil, p.genero, p.registro_federacao,
+             o.nome_organizacao, o.sigla
       FROM pessoas_usuarios p
       LEFT JOIN organizacoes_equipes o ON p.id_organizacao = o.id_organizacao
       WHERE p.id_pessoa = $1
@@ -133,7 +77,7 @@ app.get('/api/atleta/:id', async (req, res) => {
   }
 });
 
-// 4. DADOS DO PLACAR AO VIVO
+// 3. DADOS DO PLACAR AO VIVO
 app.get('/api/confronto/ao-vivo', async (req, res) => {
   try {
     const queryText = `
@@ -158,8 +102,159 @@ app.get('/api/confronto/ao-vivo', async (req, res) => {
   }
 });
 
+// ============================================================
+// ROTAS DA DASHBOARD ADMIN
+// ============================================================
+
+// 4. ESTATÍSTICAS GERAIS (cards do topo)
+app.get('/api/dashboard/stats', async (req, res) => {
+  try {
+    const [campeonatos, atletas, equipes, lutas] = await Promise.all([
+      db.query('SELECT COUNT(*) AS total FROM campeonatos'),
+      db.query(`SELECT COUNT(*) AS total FROM pessoas_usuarios WHERE tipo_perfil = 'ATLETA'`),
+      db.query('SELECT COUNT(*) AS total FROM organizacoes_equipes'),
+      db.query('SELECT COUNT(*) AS total FROM confrontos_chave'),
+    ]);
+
+    return res.json({
+      campeonatos: Number(campeonatos.rows[0].total),
+      atletas: Number(atletas.rows[0].total),
+      equipes: Number(equipes.rows[0].total),
+      lutas: Number(lutas.rows[0].total),
+    });
+  } catch (err) {
+    console.error('Erro ao buscar estatísticas:', err);
+    return res.status(500).json({ error: 'Erro ao carregar estatísticas da dashboard.' });
+  }
+});
+
+// 5. PRÓXIMOS CAMPEONATOS
+app.get('/api/dashboard/proximos-campeonatos', async (req, res) => {
+  try {
+    const queryText = `
+      SELECT 
+        c.id_campeonato,
+        c.nome_evento,
+        c.data_inicio,
+        c.data_fim,
+        c.local_ginasio,
+        c.cidade_uf,
+        o.nome_organizacao,
+        o.sigla
+      FROM campeonatos c
+      LEFT JOIN organizacoes_equipes o ON c.id_organizacao_promotora = o.id_organizacao
+      WHERE c.data_inicio >= CURRENT_DATE
+      ORDER BY c.data_inicio ASC
+      LIMIT 6
+    `;
+    const result = await db.query(queryText);
+    return res.json(result.rows);
+  } catch (err) {
+    console.error('Erro ao buscar próximos campeonatos:', err);
+    return res.status(500).json({ error: 'Erro ao carregar próximos campeonatos.' });
+  }
+});
+
+// 6. DISTRIBUIÇÃO DE ATLETAS POR MODALIDADE
+app.get('/api/dashboard/distribuicao-atletas', async (req, res) => {
+  try {
+    const queryText = `
+      SELECT 
+        m.nome_modalidade,
+        m.sigla,
+        COUNT(DISTINCT g.id_pessoa) AS total
+      FROM modalidades m
+      LEFT JOIN graduacoes g ON g.id_modalidade = m.id_modalidade
+      GROUP BY m.id_modalidade, m.nome_modalidade, m.sigla
+      ORDER BY total DESC
+    `;
+    const result = await db.query(queryText);
+
+    const totalGeral = result.rows.reduce((acc, row) => acc + Number(row.total), 0);
+
+    const distribuicao = result.rows.map((row) => ({
+      modalidade: row.nome_modalidade,
+      sigla: row.sigla,
+      total: Number(row.total),
+      percentual: totalGeral > 0 ? Math.round((Number(row.total) / totalGeral) * 100) : 0,
+    }));
+
+    return res.json({
+      total: totalGeral,
+      distribuicao,
+    });
+  } catch (err) {
+    console.error('Erro ao buscar distribuição de atletas:', err);
+    return res.status(500).json({ error: 'Erro ao carregar distribuição de atletas.' });
+  }
+});
+
+// 7. LISTA DE CONFRONTOS / CHAVES (resumo)
+app.get('/api/dashboard/confrontos', async (req, res) => {
+  try {
+    const queryText = `
+      SELECT 
+        c.id_confronto,
+        c.numero_luta,
+        c.fase,
+        c.placar_red,
+        c.placar_blue,
+        c.status_luta,
+        red.nome_completo AS atleta_red,
+        blue.nome_completo AS atleta_blue,
+        cat.nome_categoria,
+        area.nome_area
+      FROM confrontos_chave c
+      LEFT JOIN pessoas_usuarios red ON c.id_atleta_aka_red = red.id_pessoa
+      LEFT JOIN pessoas_usuarios blue ON c.id_atleta_ao_blue = blue.id_pessoa
+      LEFT JOIN categorias cat ON c.id_categoria = cat.id_categoria
+      LEFT JOIN areas_competicao area ON c.id_area = area.id_area
+      ORDER BY 
+        CASE c.status_luta 
+          WHEN 'EM_ANDAMENTO' THEN 1 
+          WHEN 'AGUARDANDO' THEN 2 
+          ELSE 3 
+        END,
+        c.id_confronto
+      LIMIT 20
+    `;
+    const result = await db.query(queryText);
+    return res.json(result.rows);
+  } catch (err) {
+    console.error('Erro ao buscar confrontos:', err);
+    return res.status(500).json({ error: 'Erro ao carregar confrontos.' });
+  }
+});
+
+// 8. LISTA DE ATLETAS (para gestão)
+app.get('/api/atletas', async (req, res) => {
+  try {
+    const queryText = `
+      SELECT 
+        p.id_pessoa,
+        p.nome_completo,
+        p.cpf,
+        p.data_nascimento,
+        p.tipo_perfil,
+        p.genero,
+        p.registro_federacao,
+        o.nome_organizacao,
+        o.sigla
+      FROM pessoas_usuarios p
+      LEFT JOIN organizacoes_equipes o ON p.id_organizacao = o.id_organizacao
+      ORDER BY p.nome_completo
+    `;
+    const result = await db.query(queryText);
+    return res.json(result.rows);
+  } catch (err) {
+    console.error('Erro ao listar atletas:', err);
+    return res.status(500).json({ error: 'Erro ao listar atletas.' });
+  }
+});
+
 // Inicialização do servidor
 app.listen(PORT, () => {
   console.log(`🚀 Apex Combate iniciado com sucesso na porta ${PORT}!`);
   console.log(`📱💻 Acesse: http://localhost:${PORT}`);
+  console.log(`📊 Dashboard: http://localhost:${PORT}/dashboard.html`);
 });

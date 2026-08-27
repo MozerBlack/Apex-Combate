@@ -41,35 +41,15 @@
   <main class="login-main">
     <div class="login-card" id="login-card">
 
-      <!-- LOGO OFICIAL (igual à imagem) -->
+      <!-- LOGO OFICIAL (imagem) -->
       <div class="login-logo">
-        <div class="logo-a-oficial">
-          <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#ef4444"/>
-                <stop offset="50%" style="stop-color:#e11d48"/>
-                <stop offset="100%" style="stop-color:#9f1239"/>
-              </linearGradient>
-            </defs>
-            <!-- Triângulo / A estilizado -->
-            <polygon points="50,2 98,88 2,88" fill="url(#redGrad)"/>
-            <!-- Corte interno do A -->
-            <polygon points="50,28 72,78 28,78" fill="#0f1520"/>
-            <!-- Barra do A (forma de raio/corte) -->
-            <polygon points="38,52 62,52 58,62 42,62" fill="url(#redGrad)"/>
-          </svg>
-        </div>
-        <div class="logo-text-oficial">
-          <span class="apex-oficial">APEX</span>
-          <span class="combate-oficial">COMBATE</span>
-        </div>
+        <img src="logo-apex-combate.svg" alt="Apex Combate" class="logo-img-oficial">
         <p class="login-card-label">LOGIN-CARD</p>
       </div>
 
       <p class="login-escolha">ESCOLHA O TIPO DE LOGIN: ATLETA / CLUBE / FEDERAÇÃO</p>
 
-      <!-- 3 OPÇÕES (brancas como na imagem) -->
+      <!-- 3 OPÇÕES -->
       <div class="login-options" id="login-options">
         <button type="button" class="login-option" data-tipo="atleta" id="opt-atleta">
           <span class="option-icon">
@@ -93,12 +73,12 @@
         </button>
       </div>
 
-      <!-- BOTÃO VERMELHO PRINCIPAL (como na imagem) -->
+      <!-- BOTÃO VERMELHO PRINCIPAL -->
       <button type="button" class="btn-entrar-principal" id="btn-entrar" disabled>
         ENTRAR
       </button>
 
-      <!-- FORMULÁRIOS (escondidos até clicar em ENTRAR com opção selecionada) -->
+      <!-- FORMULÁRIOS -->
       <div id="area-formularios" class="hidden">
         
         <form id="form-atleta" class="login-form hidden">
@@ -149,6 +129,7 @@
     </div>
   </main>
 
+  <script src="app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const options = document.querySelectorAll('.login-option');
@@ -163,7 +144,6 @@
       };
       let tipoSelecionado = null;
 
-      // Selecionar opção (fica destacada)
       options.forEach(opt => {
         opt.addEventListener('click', () => {
           options.forEach(o => o.classList.remove('selected'));
@@ -173,7 +153,6 @@
         });
       });
 
-      // Clicar em ENTRAR → mostra formulário
       btnEntrar.addEventListener('click', () => {
         if (!tipoSelecionado) return;
         optionsBox.classList.add('hidden');
@@ -184,7 +163,6 @@
         if (forms[tipoSelecionado]) forms[tipoSelecionado].classList.remove('hidden');
       });
 
-      // Voltar
       document.querySelectorAll('[data-back]').forEach(btn => {
         btn.addEventListener('click', () => {
           areaForms.classList.add('hidden');
@@ -195,7 +173,6 @@
         });
       });
 
-      // Login Atleta
       const formAtleta = document.getElementById('form-atleta');
       if (formAtleta) {
         formAtleta.addEventListener('submit', async (e) => {
@@ -225,7 +202,6 @@
         });
       }
 
-      // Clube / Federação (placeholder)
       ['form-clube', 'form-federacao'].forEach(id => {
         const f = document.getElementById(id);
         if (f) f.addEventListener('submit', e => {
@@ -233,18 +209,6 @@
           alert('Login de Clube/Federação em desenvolvimento.\nUse o acesso de Atleta por enquanto.');
         });
       });
-
-      // Máscara CPF
-      const cpfInput = document.getElementById('cpf');
-      if (cpfInput) {
-        cpfInput.addEventListener('input', (e) => {
-          let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-          v = v.replace(/(\d{3})(\d)/, '$1.$2');
-          v = v.replace(/(\d{3})(\d)/, '$1.$2');
-          v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-          e.target.value = v;
-        });
-      }
     });
   </script>
 </body>
