@@ -1082,10 +1082,6 @@ main, .container {
   position: relative;
 }
 
-  .logo-img-oficial {
-    width: 140px;
-  }
-
 
 /* Logo oficial no card */
 .login-logo {
@@ -1309,7 +1305,8 @@ main, .container {
 }
 
 
-/* Logo oficial como imagem no card de login */
+
+/* Logo oficial — alta resolução / nítida */
 .login-logo {
   margin-bottom: 0.8rem;
   display: flex;
@@ -1317,14 +1314,17 @@ main, .container {
   align-items: center;
 }
 
-.Logo.png {
-  width: 180px;
-  max-width: 70%;
+.logo-img-oficial {
+  width: 220px;
+  max-width: 85%;
   height: auto;
   display: block;
-  margin: 0 auto 0.4rem;
+  margin: 0 auto 0.5rem;
   object-fit: contain;
-  filter: drop-shadow(0 4px 20px rgba(225, 29, 72, 0.35));
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  filter: drop-shadow(0 4px 24px rgba(225, 29, 72, 0.4));
 }
 
 .login-card-label {
@@ -1362,14 +1362,18 @@ main, .container {
     letter-spacing: 3px;
   }
 
-  .Logo.png {
-    width: 58px;
-    height: 52px;
-  }
-
   .deco-shape {
     width: 140px;
     height: 140px;
     opacity: 0.12;
   }
 }
+
+@media (max-width: 768px) {
+  .logo-img-oficial {
+    width: 160px;
+    max-width: 70%;
+    height: auto;
+  }
+}
+
