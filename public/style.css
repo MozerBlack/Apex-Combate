@@ -1315,16 +1315,14 @@ main, .container {
 }
 
 .logo-img-oficial {
-  width: 220px;
-  max-width: 85%;
+  width: 200px;
+  max-width: 75%;
   height: auto;
   display: block;
-  margin: 0 auto 0.5rem;
+  margin: 0 auto 0.35rem;
   object-fit: contain;
   image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
-  filter: drop-shadow(0 4px 24px rgba(225, 29, 72, 0.4));
+  /* sem blur / filter pesado — mantém nítido */
 }
 
 .login-card-label {
