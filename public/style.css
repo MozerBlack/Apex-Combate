@@ -1375,3 +1375,40 @@ main, .container {
   }
 }
 
+/* ===== LOGO OFICIAL (SVG nítida) ===== */
+.login-logo {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-svg-wrap {
+  width: 210px;
+  max-width: 78%;
+  margin: 0 auto 0.15rem;
+  line-height: 0;
+}
+
+.logo-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* vetor = sempre nítido, sem blur */
+}
+
+.login-card-label {
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .logo-svg-wrap {
+    width: 170px;
+  }
+}
+
